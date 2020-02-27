@@ -1,0 +1,46 @@
+version: "3.5"
+
+services:
+  discovery:
+    image: derex/discovery:ironwood
+    container_name: "{{ project.name }}_discovery"
+    volumes:
+      - derex_{{ project.name }}_media:/openedx/media
+      - {{ settings_dir }}:/openedx/discovery/course_discovery/settings/derex_project
+      {%- if plugins_dirs.get("requirements") %}
+      - {{ plugins_dirs.get("requirements") }}:/openedx/derex.requirements
+      {% endif %}
+      {%- if plugins_dirs.get("fixtures") %}
+      - {{ plugins_dirs.get("fixtures") }}:/openedx/fixtures
+      {% endif %}
+    {% if project.runmode.value == "debug" -%}
+    command:
+      sh -c 'exec ./manage.py runserver --noreload 0:4910'
+    {% else -%}
+    command:
+      sh -c 'exec gunicorn
+        --bind=0.0.0.0:4910
+        --workers 2
+        --max-requests=1000
+        course_discovery.wsgi_whitenoise:application'
+    {% endif -%}
+    environment:
+      SERVICE_VARIANT: discovery
+      DJANGO_SETTINGS_MODULE: course_discovery.settings.derex_project.{{ active_settings }}
+      MYSQL_DB_NAME: "{{ project.name }}_discovery"
+      {%- for key, value in project.get_container_env().items() %}
+      {{ key }}: {{ value }}
+      {%- endfor %}
+    ports:
+      - 4910:4910
+    networks:
+      derex:
+
+  lms:
+    networks:
+      derex:
+        aliases:
+          - lms.localhost
+
+volumes:
+  derex_{{ project.name }}_media:
