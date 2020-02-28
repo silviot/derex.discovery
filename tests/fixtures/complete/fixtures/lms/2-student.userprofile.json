@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "user": 1,
-        "name": "discovery_worker",
+        "name": "ecommerce_worker",
         "courseware": "course.xml",
         "language": "",
         "location": "",
@@ -25,6 +25,27 @@
     "pk": 2,
     "fields": {
         "user": 2,
+        "name": "discovery_worker",
+        "courseware": "course.xml",
+        "language": "",
+        "location": "",
+        "year_of_birth": null,
+        "gender": null,
+        "level_of_education": null,
+        "mailing_address": null,
+        "city": null,
+        "country": "",
+        "goals": null,
+        "allow_certificate": true,
+        "bio": null,
+        "profile_image_uploaded_at": null
+    }
+},
+{
+    "model": "student.userprofile",
+    "pk": 3,
+    "fields": {
+        "user": 3,
         "name": "login_service_user",
         "meta": "",
         "courseware": "course.xml",
@@ -44,31 +65,10 @@
 },
 {
   "model": "student.userprofile",
-  "pk": 3,
-  "fields": {
-      "user": 3,
-      "name": "user",
-      "courseware": "course.xml",
-      "language": "",
-      "location": "",
-      "year_of_birth": null,
-      "gender": null,
-      "level_of_education": null,
-      "mailing_address": null,
-      "city": null,
-      "country": "",
-      "goals": null,
-      "allow_certificate": true,
-      "bio": null,
-      "profile_image_uploaded_at": null
-  }
-},
-{
-  "model": "student.userprofile",
   "pk": 4,
   "fields": {
       "user": 4,
-      "name": "staff",
+      "name": "user",
       "courseware": "course.xml",
       "language": "",
       "location": "",
@@ -89,7 +89,7 @@
   "pk": 5,
   "fields": {
       "user": 5,
-      "name": "superuser",
+      "name": "staff",
       "courseware": "course.xml",
       "language": "",
       "location": "",
@@ -105,4 +105,25 @@
       "profile_image_uploaded_at": null
   }
 },
+{
+  "model": "student.userprofile",
+  "pk": 6,
+  "fields": {
+      "user": 6,
+      "name": "superuser",
+      "courseware": "course.xml",
+      "language": "",
+      "location": "",
+      "year_of_birth": null,
+      "gender": null,
+      "level_of_education": null,
+      "mailing_address": null,
+      "city": null,
+      "country": "",
+      "goals": null,
+      "allow_certificate": true,
+      "bio": null,
+      "profile_image_uploaded_at": null
+  }
+}
 ]
