@@ -1,0 +1,13 @@
+---
+project_name: discovery_complete
+plugins:
+  derex.discovery: {}
+  derex.ecommerce: {}
+
+variables:
+  ALL_JWT_ISSUER:
+    base: http://lms.localhost/oauth2
+  ALL_JWT_AUDIENCE:
+    base: lms-key
+  ALL_JWT_SECRET_KEY:
+    base: lms-secret

@@ -2,4 +2,3 @@
 project_name: discovery_minimal
 plugins:
   derex.discovery: {}
-  derex.ecommerce: {}
