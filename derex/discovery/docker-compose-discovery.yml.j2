@@ -35,12 +35,20 @@ services:
       - 4910:4910
     networks:
       derex:
+        aliases:
+          - discovery.localhost
 
   lms:
     networks:
       derex:
         aliases:
           - lms.localhost
+
+  cms:
+    networks:
+      derex:
+        aliases:
+          - cms.localhost
 
 volumes:
   derex_{{ project.name }}_media:
