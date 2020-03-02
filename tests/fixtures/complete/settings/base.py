@@ -16,4 +16,4 @@ JWT_AUTH["JWT_SIGNING_ALGORITHM"] = JWT_SIGNING_ALGORITHM
 ECOMMERCE_PUBLIC_URL_ROOT = "http://ecommerce.localhost:4900"
 ECOMMERCE_API_URL = "http://ecommerce.localhost:4900/api/v2"
 
-COURSE_CATALOG_API_URL = "http://discovery.localhost:4900"
+COURSE_CATALOG_API_URL = "http://discovery.localhost:4910"
