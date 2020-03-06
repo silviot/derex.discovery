@@ -92,6 +92,11 @@ COPY ./empty_dump.sql.bz2 /openedx/empty_dump.sql.bz2
 
 COPY ./wsgi_whitenoise.py ./course_discovery/wsgi_whitenoise.py
 
+# Patch Discovery code to fix the missing course card image in the
+# Ecommerce basket page
+COPY ./discovery.patch ./discovery.patch
+RUN git apply discovery.patch
+
 EXPOSE 4910
 CMD gunicorn \
     --bind=0.0.0.0:4910 \
