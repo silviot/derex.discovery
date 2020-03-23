@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Optional, Union
 
 from derex import runner  # type: ignore
 from derex.runner.project import Project, SettingsModified
@@ -73,14 +73,16 @@ def generate_local_docker_compose(project: Project) -> Path:
 class DiscoveryService:
     @staticmethod
     @runner.hookimpl
-    def local_compose_options(project: Project) -> Optional[Dict[str, Union[str, List[str]]]]:
+    def local_compose_options(
+        project: Project,
+    ) -> Optional[Dict[str, Union[str, List[str]]]]:
         if "derex.discovery" in project.config.get("plugins", {}):
             local_compose_path = generate_local_docker_compose(project)
             options = ["-f", str(local_compose_path)]
             return {
                 "options": options,
                 "name": "discovery",
-                "priority": ">base",
+                "priority": "<local-derex",
                 "variant": "openedx",
             }
         return None
