@@ -1,4 +1,4 @@
 -r requirements.in
 
-https://github.com/Abstract-Tech/derex.ecommerce/tarball/master#egg=derex.ecommerce
+https://github.com/Abstract-Tech/derex.ecommerce/tarball/2cad31a5b85272c7396ced4016debb3db7e3ad64#egg=derex.ecommerce
 pre-commit
