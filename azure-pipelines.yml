@@ -26,7 +26,6 @@ jobs:
       - script: |
           set -ex
           cd tests/fixtures/minimal/
-          derex runmode production
           ddc-project config
           ddc-project up -d lms cms discovery
         displayName: "Start lms, cms and discovery"
@@ -69,6 +68,8 @@ jobs:
           set -ex
           cd tests/fixtures/complete/
           derex reset-mysql
+          derex ecommerce reset-mysql
+          derex ecommerce load-fixtures
           derex discovery reset-mysql
           derex discovery load-fixtures
           derex discovery create-index
@@ -77,7 +78,6 @@ jobs:
       - script: |
           set -ex
           cd tests/fixtures/complete/
-          derex runmode production
           ddc-project config
           ddc-project up -d lms cms ecommerce discovery
         displayName: "Start lms, cms, ecommerce and discovery"
