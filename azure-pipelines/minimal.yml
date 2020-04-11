@@ -1,0 +1,61 @@
+parameters:
+  - name: JOB_VARIANT
+    type: string
+    default: ""
+  - name: PIN_VERSIONS
+    type: string
+    default: "true"
+
+jobs:
+  - job: Minimal${{ parameters.JOB_VARIANT }}
+    timeoutInMinutes: 40
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - template: setup.yml
+        parameters:
+          PIN_VERSIONS: ${{ parameters.PIN_VERSIONS }}
+
+      - script: |
+          set -ex
+          cd tests/fixtures/minimal/
+          derex reset-mysql
+          derex discovery reset-mysql
+          derex discovery load-fixtures
+          derex discovery create-index
+        displayName: "Prime Mysql and Elasticsearch"
+
+      - script: |
+          set -ex
+          cd tests/fixtures/minimal/
+          ddc-project config
+          ddc-project up -d lms cms discovery
+        displayName: "Start lms, cms and discovery"
+
+      - script: |
+          set -ex
+          cd tests/fixtures/minimal/
+          ddc-project logs
+        displayName: "Show logs"
+
+
+      - script: |
+          set -ex
+          COUNT=$(
+            curl -sf http://localhost:4910/health/ \
+              --connect-timeout 30 \
+              --retry 5 \
+              --retry-delay 5 \
+              --retry-connrefused | grep -o "OK" | wc -l
+          )
+          if [ $COUNT != 2 ]; then
+              exit 1
+          fi
+        displayName: "Curl the Discovery service"
+
+      - script: |
+          set -ex
+          cd tests/fixtures/minimal/
+          derex discovery refresh-course-metadata
+          derex discovery update-index
+        displayName: "Run Discovery data synchronization pipeline"

@@ -7,7 +7,7 @@ with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
 requirements = [
-    "derex.runner @ https://github.com/Abstract-Tech/derex.runner/tarball/master#egg=derex.runner",  # noqa: E501
+    "derex.runner",
     "jinja2",
 ]
 
@@ -37,9 +37,7 @@ setup(
     description="Derex Plugin to integrate Open edX Discovery",
     entry_points={
         "derex.runner": ["discovery=derex.discovery.config:DiscoveryService"],
-        "derex.runner.cli_plugins": [
-            "discovery=derex.discovery.cli:discovery"
-        ],
+        "derex.runner.cli_plugins": ["discovery=derex.discovery.cli:discovery"],
     },
     install_requires=requirements,
     license="GNU General Public License v3",
