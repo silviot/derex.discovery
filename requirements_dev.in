@@ -1,4 +1,3 @@
 -r requirements.in
 
-https://github.com/Abstract-Tech/derex.runner/tarball/master#egg=derex.runner
 pre-commit
