@@ -3,7 +3,6 @@ version: "3.5"
 services:
   discovery:
     image: derex/discovery:ironwood
-    container_name: "{{ project.name }}_discovery"
     volumes:
       - derex_{{ project.name }}_media:/openedx/media
       - {{ settings_dir }}:/openedx/discovery/course_discovery/settings/derex_project
