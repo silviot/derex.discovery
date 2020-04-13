@@ -30,6 +30,7 @@ jobs:
       - script: |
           set -ex
           cd tests/fixtures/complete/
+          derex runmode production
           ddc-project config
           ddc-project up -d lms cms ecommerce discovery
         displayName: "Start lms, cms, ecommerce and discovery"

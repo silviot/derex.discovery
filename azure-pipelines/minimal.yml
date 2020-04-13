@@ -28,6 +28,7 @@ jobs:
       - script: |
           set -ex
           cd tests/fixtures/minimal/
+          derex runmode production
           ddc-project config
           ddc-project up -d lms cms discovery
         displayName: "Start lms, cms and discovery"
